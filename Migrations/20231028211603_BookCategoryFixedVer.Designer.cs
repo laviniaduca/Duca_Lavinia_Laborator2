@@ -4,6 +4,7 @@ using Duca_Lavinia_Laborator2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Duca_Lavinia_Laborator2.Migrations
 {
     [DbContext(typeof(Duca_Lavinia_Laborator2Context))]
-    partial class Duca_Lavinia_Laborator2ContextModelSnapshot : ModelSnapshot
+    [Migration("20231028211603_BookCategoryFixedVer")]
+    partial class BookCategoryFixedVer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

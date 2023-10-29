@@ -4,6 +4,7 @@ using Duca_Lavinia_Laborator2.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Duca_Lavinia_Laborator2.Migrations
 {
     [DbContext(typeof(Duca_Lavinia_Laborator2Context))]
-    partial class Duca_Lavinia_Laborator2ContextModelSnapshot : ModelSnapshot
+    [Migration("20231028170730_BookCategory")]
+    partial class BookCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,7 +84,11 @@ namespace Duca_Lavinia_Laborator2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int>("BookID")
+                    b.Property<string>("BookID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("BookID1")
                         .HasColumnType("int");
 
                     b.Property<int>("CategoryID")
@@ -90,7 +96,7 @@ namespace Duca_Lavinia_Laborator2.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("BookID");
+                    b.HasIndex("BookID1");
 
                     b.HasIndex("CategoryID");
 
@@ -150,7 +156,7 @@ namespace Duca_Lavinia_Laborator2.Migrations
                 {
                     b.HasOne("Duca_Lavinia_Laborator2.Models.Book", "Book")
                         .WithMany("BookCategories")
-                        .HasForeignKey("BookID")
+                        .HasForeignKey("BookID1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
