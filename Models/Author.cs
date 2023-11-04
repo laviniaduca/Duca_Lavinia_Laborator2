@@ -12,5 +12,7 @@ namespace Duca_Lavinia_Laborator2.Models
 
         [Display(Name = "Full Name")]
         public string FullName => FirstName + " " + LastName;
+
+        public ICollection<Book?> Books { get; set; }
     }
 }

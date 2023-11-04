@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Duca_Lavinia_Laborator2.Data;
 using Duca_Lavinia_Laborator2.Models;
+using Duca_Lavinia_Laborator2.Models.ViewModels;
 
 namespace Duca_Lavinia_Laborator2.Pages.Categories
 {
@@ -21,12 +22,34 @@ namespace Duca_Lavinia_Laborator2.Pages.Categories
 
         public IList<Category> Category { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public CategoryIndexData CategoryData { get; set; }
+        public int CategoryID { get; set; }
+        public int BookID { get; set; }
+
+
+        public async Task OnGetAsync(int? id, int? bookID)
         {
-            if (_context.Category != null)
-            {
-                Category = await _context.Category.ToListAsync();
-            }
+            CategoryData = new CategoryIndexData();
+            CategoryData.Categories = await _context.Category
+                .Include(i => i.BookCategories)
+                    .ThenInclude(c => c.Book)
+                    .ThenInclude(b => b.Author) // eager loading la Author
+                .OrderBy(i => i.CategoryName)
+                .ToListAsync();
+
+        if (id != null)
+        {
+                CategoryID = id.Value;
+                Category category = CategoryData.Categories
+                    .Where(i => i.ID == id.Value).Single();
+
+                if (category!= null)
+                {
+                    // accesam books pentru categoria selectata prin navigation property de la BookCategories
+                    CategoryData.Books = category.BookCategories.Select(c => c.Book).ToList();
+                }
+        }
+
         }
     }
 }
