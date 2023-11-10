@@ -25,6 +25,7 @@ namespace Duca_Lavinia_Laborator2.Models
 
         public Author? Author { get; set; } // proprietatea de navigare
 
+
         public ICollection<BookCategory>? BookCategories { get; set; }
     }
 }
