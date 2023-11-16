@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Duca_Lavinia_Laborator2.Data;
 using Duca_Lavinia_Laborator2.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Duca_Lavinia_Laborator2.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : BookCategoriesPageModel
     {
         private readonly Duca_Lavinia_Laborator2.Data.Duca_Lavinia_Laborator2Context _context;
